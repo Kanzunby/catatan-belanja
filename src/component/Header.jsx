@@ -1,7 +1,7 @@
 function Header() {
   return (
-    <div className="pb-8 pt-12 bg-primary w-full h-auto justify-center mx-auto">
-      <h1 className="text-5xl font-borel text-white text-center">
+    <div className="pb-6 pt-10 bg-primary w-full h-auto justify-center mx-auto">
+      <h1 className="text-4xl font-borel text-white text-center">
         Catatan Belanja 📝
       </h1>
     </div>

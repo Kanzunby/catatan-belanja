@@ -3,19 +3,30 @@ import { useState } from "react";
 function AddForm({ onAddItem }) {
   const [name, setName] = useState("");
   const [quantity, setQuantity] = useState(1);
+  const [unit, setUnit] = useState("Pcs");
+  const [price, setPrice] = useState("");
+  const total = quantity * Number(price);
 
   function handleSubmit(e) {
     e.preventDefault();
 
-    if (!name) return;
+    if (!name || !price) {
+      return alert("Masukkan nama barang dan harga");
+    } else if (isNaN(Number(price))) {
+      return alert("Masukkan Angka pada input Harga!");
+    }
 
     const newItem = {
       name,
+      unit,
       quantity,
+      price,
+      total,
       checked: false,
       id: Date.now(),
     };
     onAddItem(newItem);
+    return;
   }
 
   const quantityNum = Array(20)
@@ -26,8 +37,10 @@ function AddForm({ onAddItem }) {
       </option>
     ));
 
+  const unitName = ["Pcs", "Kg", "Liter", "Buah"];
+
   return (
-    <div className="mx-auto w-full bg-background1 py-6">
+    <div className="mx-auto w-full bg-background1 py-4">
       <h3 className="text-center text-2xl font-sans text-primary font-bold">
         Hari ini kita belanja apa?
       </h3>
@@ -37,17 +50,36 @@ function AddForm({ onAddItem }) {
       >
         <select
           value={quantity}
-          onChange={(e) => setQuantity(Number(e.target.value))}
-          className="w-20 h-10 text-md text-black text-center bg-background rounded-full focus:outline-none"
+          onChange={(e) => setQuantity(e.target.value)}
+          className="h-10 w-14 text-md text-black text-center bg-background rounded-full focus:outline-none"
         >
           {quantityNum}
         </select>
+        <select
+          value={unit}
+          onChange={(e) => setUnit(e.target.value)}
+          placeholder="unit"
+          className="h-10 w-20 text-md text-black text-center bg-background rounded-full focus:outline-none"
+        >
+          {unitName.map((unit, i) => (
+            <option value={unit} key={i}>
+              {unit}
+            </option>
+          ))}
+        </select>
         <input
           type="text"
-          placeholder="nama barang..."
+          placeholder="Nama barang..."
           value={name}
           onChange={(e) => setName(e.target.value)}
-          className="h-10 w-64 bg-background rounded-full px-6 focus:outline-none text-md"
+          className="h-10 w-64 bg-background rounded-full px-6 focus:outline-none text-base"
+        />
+        <input
+          type="text"
+          placeholder="Harga"
+          value={price}
+          onChange={(e) => setPrice(e.target.value)}
+          className="h-10 w-32 bg-background rounded-full px-4 focus:outline-none text-base"
         />
         <button className="w-32 h-10 bg-primary text-background text-md rounded-full">
           Tambah
