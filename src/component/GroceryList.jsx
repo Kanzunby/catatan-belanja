@@ -1,13 +1,7 @@
 import { useState } from "react";
 import Item from "../croceryListItem/Item";
 
-function GroceryList({
-  items,
-  onRemoveItem,
-  onCheckItem,
-  onClearItems,
-  // totalPrice,
-}) {
+function GroceryList({ items, onRemoveItem, onCheckItem, onClearItems }) {
   const [sortBy, setSortBy] = useState("input");
   // console.log(Number(items[1].price) * items[1].quantity);
   let sortedItems;
@@ -36,11 +30,7 @@ function GroceryList({
       break;
   }
 
-  let totalPrice = 0;
-
-  for (var i = 0; i < items.length; i++) {
-    totalPrice += items[i].total;
-  }
+  const totalPrice = items?.reduce((acc, curr) => acc + curr.total, 0);
 
   return (
     <>
