@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import "./App.css";
 import AddForm from "./component/AddForm";
 import Footer from "./component/Footer";
@@ -9,7 +9,6 @@ const groceryItems = [];
 
 function App() {
   const [items, setItems] = useState(groceryItems);
-  // const [totalPrice, setTotalPrice] = useState(0);
 
   console.log(items);
 
@@ -33,19 +32,6 @@ function App() {
     setItems([]);
   }
 
-  // function totalHarga(items) {
-  //   items.reduce((item, x) => {
-  //     item[x].total;
-  //   });
-  //   return;
-  // }
-
-  // console.log(totalHarga);
-
-  // useEffect(() => {
-  //   setTotalPrice(totalPrice);
-  // }, []);
-
   return (
     <div className="relative mx-auto w-[900px]">
       <Header />
@@ -55,7 +41,6 @@ function App() {
         onRemoveItem={handleRemoveItem}
         onCheckItem={handleToogleItem}
         onClearItems={handleClearItems}
-        // totalPrice={totalPrice}
       />
       <Footer items={items} />
     </div>
